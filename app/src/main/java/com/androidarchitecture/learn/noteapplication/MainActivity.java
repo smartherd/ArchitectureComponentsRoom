@@ -1,17 +1,22 @@
 package com.androidarchitecture.learn.noteapplication;
 
+import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.util.List;
 import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
@@ -19,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int NEW_NOTE_ACTIVITY_REQUEST_CODE = 1;
     private String TAG = this.getClass().getSimpleName();
     private NoteViewModel noteViewModel;
+    private NoteListAdapter noteListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +33,12 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-       FloatingActionButton fab = findViewById(R.id.fab);
+        RecyclerView recyclerView = findViewById(R.id.recyclerview);
+        noteListAdapter = new NoteListAdapter(this);
+        recyclerView.setAdapter(noteListAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -37,6 +48,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
         noteViewModel = ViewModelProviders.of(this).get(NoteViewModel.class);
+
+        noteViewModel.getAllNotes().observe(this, new Observer<List<Note>>() {
+            @Override
+            public void onChanged(@Nullable List<Note> notes) {
+                noteListAdapter.setNotes(notes);
+            }
+        });
     }
 
     @Override

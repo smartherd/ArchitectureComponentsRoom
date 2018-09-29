@@ -5,4 +5,5 @@
     <string name="save">Save</string>
     <string name="saved">Note Saved</string>
     <string name="not_saved">Couldn\'t Save</string>
+    <string name="no_note">No notes</string>
 </resources>
