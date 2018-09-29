@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">NoteApplication</string>
     <string name="action_settings">Settings</string>
+    <string name="new_note">Add Note</string>
+    <string name="save">Save</string>
+    <string name="saved">Note Saved</string>
+    <string name="not_saved">Couldn\'t Save</string>
 </resources>
