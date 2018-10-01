@@ -23,7 +23,4 @@ public interface NoteDao {
 
     @Update
     void update(Note note);
-
-    @Delete
-    int delete(Note note);
 }
