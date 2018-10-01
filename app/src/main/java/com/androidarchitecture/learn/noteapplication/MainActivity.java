@@ -19,9 +19,10 @@ import android.widget.Toast;
 import java.util.List;
 import java.util.UUID;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements NoteListAdapter.OnDeleteClickListener {
 
     private static final int NEW_NOTE_ACTIVITY_REQUEST_CODE = 1;
+    public static final int UPDATE_NOTE_ACTIVITY_REQUEST_CODE = 2;
     private String TAG = this.getClass().getSimpleName();
     private NoteViewModel noteViewModel;
     private NoteListAdapter noteListAdapter;
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerview);
-        noteListAdapter = new NoteListAdapter(this);
+        noteListAdapter = new NoteListAdapter(this, this);
         recyclerView.setAdapter(noteListAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -72,11 +73,30 @@ public class MainActivity extends AppCompatActivity {
                     getApplicationContext(),
                     R.string.saved,
                     Toast.LENGTH_LONG).show();
+        } else if (requestCode == UPDATE_NOTE_ACTIVITY_REQUEST_CODE && resultCode == RESULT_OK) {
+
+            // Code to update the note
+            Note note = new Note(
+                    data.getStringExtra(EditNoteActivity.NOTE_ID),
+                    data.getStringExtra(EditNoteActivity.UPDATED_NOTE));
+            noteViewModel.update(note);
+
+            Toast.makeText(
+                    getApplicationContext(),
+                    R.string.updated,
+                    Toast.LENGTH_LONG).show();
+
         } else {
             Toast.makeText(
                     getApplicationContext(),
                     R.string.not_saved,
                     Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    public void OnDeleteClickListener(Note myNote) {
+        // Code for Delete operation
+        noteViewModel.delete(myNote);
     }
 }

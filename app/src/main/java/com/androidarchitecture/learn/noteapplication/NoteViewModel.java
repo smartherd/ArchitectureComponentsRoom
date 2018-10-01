@@ -32,6 +32,14 @@ public class NoteViewModel extends AndroidViewModel {
         return mAllNotes;
     }
 
+    public void update(Note note) {
+        new UpdateAsyncTask(noteDao).execute(note);
+    }
+
+    public void delete(Note note) {
+        new DeleteAsyncTask(noteDao).execute(note);
+    }
+
     @Override
     protected void onCleared() {
         super.onCleared();
@@ -42,13 +50,43 @@ public class NoteViewModel extends AndroidViewModel {
 
         NoteDao mNoteDao;
 
-        public InsertAsyncTask(NoteDao mNoteDao) {
+        InsertAsyncTask(NoteDao mNoteDao) {
             this.mNoteDao = mNoteDao;
         }
 
         @Override
         protected Void doInBackground(Note... notes) {
             mNoteDao.insert(notes[0]);
+            return null;
+        }
+    }
+
+    private class UpdateAsyncTask extends AsyncTask<Note, Void, Void> {
+
+        NoteDao mNoteDao;
+
+        UpdateAsyncTask(NoteDao noteDao) {
+            this.mNoteDao = noteDao;
+        }
+
+        @Override
+        protected Void doInBackground(Note... notes) {
+            mNoteDao.update(notes[0]);
+            return null;
+        }
+    }
+
+    private class DeleteAsyncTask extends AsyncTask<Note, Void, Void> {
+
+        NoteDao mNoteDao;
+
+        public DeleteAsyncTask(NoteDao noteDao) {
+            this.mNoteDao = noteDao;
+        }
+
+        @Override
+        protected Void doInBackground(Note... notes) {
+            mNoteDao.delete(notes[0]);
             return null;
         }
     }

@@ -32,6 +32,27 @@
                 android:textStyle="bold"/>
 
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ivRowDelete"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_margin="7dp"
+                android:src="@drawable/ic_delete"
+                android:tint="#9E9E9E"/>
+
+            <ImageView
+                android:id="@+id/ivRowEdit"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_margin="7dp"
+                android:src="@drawable/ic_edit"
+                android:tint="#9E9E9E"/>
+        </LinearLayout>
 
     </LinearLayout>
 
