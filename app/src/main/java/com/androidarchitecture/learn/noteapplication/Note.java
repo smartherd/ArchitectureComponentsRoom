@@ -1,9 +1,9 @@
 package com.androidarchitecture.learn.noteapplication;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 @Entity(tableName = "notes")
 public class Note {
@@ -20,11 +20,11 @@ public class Note {
 
     @PrimaryKey
     @NonNull
-    private String id;
+    private final String id;
 
     @NonNull
     @ColumnInfo(name = "note")
-    private String mNote;
+    private final String mNote;
 
     public Note(String id, String note) {
         this.id = id;

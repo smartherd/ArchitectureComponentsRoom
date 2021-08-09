@@ -3,14 +3,14 @@ package com.androidarchitecture.learn.noteapplication;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
@@ -21,9 +21,9 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.NoteVi
     }
 
     private final LayoutInflater layoutInflater;
-    private Context mContext;
+    private final Context mContext;
     private List<Note> mNotes;
-    private OnDeleteClickListener onDeleteClickListener;
+    private final OnDeleteClickListener onDeleteClickListener;
 
     public NoteListAdapter(Context context, OnDeleteClickListener listener) {
         layoutInflater = LayoutInflater.from(context);
@@ -66,15 +66,16 @@ public class NoteListAdapter extends RecyclerView.Adapter<NoteListAdapter.NoteVi
 
     public class NoteViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView noteItemView;
+        private final TextView noteItemView;
         private int mPosition;
-        private ImageView imgDelete, imgEdit;
+        private final ImageView imgDelete;
+        private final ImageView imgEdit;
 
         public NoteViewHolder(View itemView) {
             super(itemView);
             noteItemView = itemView.findViewById(R.id.txvNote);
-            imgDelete 	 = itemView.findViewById(R.id.ivRowDelete);
-            imgEdit 	 = itemView.findViewById(R.id.ivRowEdit);
+            imgDelete = itemView.findViewById(R.id.ivRowDelete);
+            imgEdit = itemView.findViewById(R.id.ivRowEdit);
         }
 
         public void setData(String note, int position) {

@@ -1,14 +1,16 @@
 package com.androidarchitecture.learn.noteapplication;
 
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 public class EditNoteActivity extends AppCompatActivity {
 
@@ -34,14 +36,25 @@ public class EditNoteActivity extends AppCompatActivity {
             noteId = bundle.getString("note_id");
         }
 
-        noteModel = ViewModelProviders.of(this).get(EditNoteViewModel.class);
+        //noteModel = ViewModelProviders.of(this).get(EditNoteViewModel.class);
+        noteModel = new ViewModelProvider(this).get(EditNoteViewModel.class);
+
         note = noteModel.getNote(noteId);
+
         note.observe(this, new Observer<Note>() {
             @Override
             public void onChanged(@Nullable Note note) {
                 etNote.setText(note.getNote());
+
             }
-        });
+        });        /*
+        note.observe(this, new Observer<Note>() {
+            @Override
+            public void onChanged(@android.support.annotation.Nullable @Nullable Note note) {
+                etNote.setText(note.getNote());
+
+            }
+        });*/
     }
 
     public void updateNote(View view) {
@@ -55,5 +68,10 @@ public class EditNoteActivity extends AppCompatActivity {
 
     public void cancelUpdate(View view) {
         finish();
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 }

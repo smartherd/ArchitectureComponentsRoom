@@ -1,20 +1,19 @@
 package com.androidarchitecture.learn.noteapplication;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
+
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 import java.util.UUID;
@@ -23,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements NoteListAdapter.O
 
     private static final int NEW_NOTE_ACTIVITY_REQUEST_CODE = 1;
     public static final int UPDATE_NOTE_ACTIVITY_REQUEST_CODE = 2;
-    private String TAG = this.getClass().getSimpleName();
+    private final String TAG = this.getClass().getSimpleName();
     private NoteViewModel noteViewModel;
     private NoteListAdapter noteListAdapter;
 
@@ -48,14 +47,18 @@ public class MainActivity extends AppCompatActivity implements NoteListAdapter.O
             }
         });
 
-        noteViewModel = ViewModelProviders.of(this).get(NoteViewModel.class);
+        //noteViewModel = ViewModelProviders.of(this).get(NoteViewModel.class);
+
+        noteViewModel = new ViewModelProvider(this).get(NoteViewModel.class);
 
         noteViewModel.getAllNotes().observe(this, new Observer<List<Note>>() {
             @Override
-            public void onChanged(@Nullable List<Note> notes) {
+            public void onChanged(List<Note> notes) {
                 noteListAdapter.setNotes(notes);
+
             }
         });
+
     }
 
     @Override
@@ -98,5 +101,10 @@ public class MainActivity extends AppCompatActivity implements NoteListAdapter.O
     public void OnDeleteClickListener(Note myNote) {
         // Code for Delete operation
         noteViewModel.delete(myNote);
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 }

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -43,7 +42,7 @@
                 android:layout_height="20dp"
                 android:layout_margin="7dp"
                 android:src="@drawable/ic_delete"
-                android:tint="#9E9E9E"/>
+                card_view:tint="#9E9E9E" />
 
             <ImageView
                 android:id="@+id/ivRowEdit"
@@ -51,10 +50,10 @@
                 android:layout_height="20dp"
                 android:layout_margin="7dp"
                 android:src="@drawable/ic_edit"
-                android:tint="#9E9E9E"/>
+                card_view:tint="#9E9E9E" />
         </LinearLayout>
 
     </LinearLayout>
 
-</android.support.v7.widget.CardView>
+</androidx.cardview.widget.CardView>
 
