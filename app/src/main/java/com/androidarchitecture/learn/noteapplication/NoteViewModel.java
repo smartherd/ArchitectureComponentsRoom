@@ -1,20 +1,21 @@
 package com.androidarchitecture.learn.noteapplication;
 
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
-import android.arch.lifecycle.LiveData;
-import android.arch.lifecycle.MutableLiveData;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
+
 import java.util.List;
+
 
 public class NoteViewModel extends AndroidViewModel {
 
-    private String TAG = this.getClass().getSimpleName();
-    private NoteDao noteDao;
-    private NoteRoomDatabase noteDB;
-    private LiveData<List<Note>> mAllNotes;
+    private final String TAG = this.getClass().getSimpleName();
+    private final NoteDao noteDao;
+    private final NoteRoomDatabase noteDB;
+    private final LiveData<List<Note>> mAllNotes;
 
     public NoteViewModel(Application application) {
         super(application);

@@ -1,16 +1,18 @@
 package com.androidarchitecture.learn.noteapplication;
 
+
 import android.app.Application;
-import android.arch.lifecycle.AndroidViewModel;
-import android.arch.lifecycle.LiveData;
-import android.support.annotation.NonNull;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 
 public class EditNoteViewModel extends AndroidViewModel {
 
-    private String TAG = this.getClass().getSimpleName();
-    private NoteDao noteDao;
-    private NoteRoomDatabase db;
+    private final String TAG = this.getClass().getSimpleName();
+    private final NoteDao noteDao;
+    private final NoteRoomDatabase db;
 
     public EditNoteViewModel(@NonNull Application application) {
         super(application);
